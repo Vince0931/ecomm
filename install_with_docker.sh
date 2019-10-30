@@ -14,7 +14,7 @@ if [ -x "$(command -v docker)" ]; then
     open http://localhost:8008
 
     #docker exec -it webid-php-fpm /bin/bash -c "make install"
-
+    docker exec -it ecom-php-fpm /bin/bash
 
 else
     echo "Install docker !!!"
@@ -33,7 +33,7 @@ echo '****************************************************'
 # docker-compose down #stop all container
 # docker ps # inspect container
 
-# docker rm $(docker ps -a -q) --force
-# docker rmi $(docker images -q) --force
+docker rm $(docker ps -a -q) --force
+docker rmi $(docker images -q) --force
 
 

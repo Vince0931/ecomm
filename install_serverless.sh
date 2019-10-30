@@ -21,9 +21,6 @@ composer install --optimize-autoloader --no-dev
 npm install serverless-pseudo-parameters
 
 
-# webpack
-npm install serverless-webpack --save-dev
-
 
 
 # link nova media

@@ -49506,8 +49506,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/nose/Aimeos/src/integrations/aimeos.new/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/nose/Aimeos/src/integrations/aimeos.new/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/vincent.cau/Library/Mobile Documents/com~apple~CloudDocs/solar swiss/ecommerce/myshop/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/vincent.cau/Library/Mobile Documents/com~apple~CloudDocs/solar swiss/ecommerce/myshop/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
