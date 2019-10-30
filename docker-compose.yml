@@ -1,0 +1,40 @@
+version: "3.4"
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: ecom-mysql
+    working_dir: /application
+    volumes:
+      - .:/application
+      - db_data_ecom:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: ecom
+      MYSQL_USER: ecom_user
+      MYSQL_PASSWORD: secret
+    ports:
+      - "8009:3306"
+
+  webserver:
+    image: nginx:alpine
+    container_name: ecom-webserver
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8008:80"
+
+  php-fpm:
+    build: phpdocker/php-fpm
+    container_name: ecom-php-fpm
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+
+
+volumes:
+  db_data_ecom: {}
