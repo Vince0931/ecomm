@@ -197,7 +197,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ecomm-lambda/dev/1572478201287-2019-10-30T23:30:01.287Z/ecomm-lambda.zip"
+                "S3Key": "serverless/ecomm-lambda/dev/1572505771779-2019-10-31T07:09:31.779Z/ecomm-lambda.zip"
               },
               "FunctionName": "ecomm-lambda-dev-website",
               "Handler": "public/index.php",
@@ -245,14 +245,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "WebsiteLambdaVersionj0Ce6rxmraFvvpe2rSpuf3BSVwbK3hBpNrcbllj1s": {
+          "WebsiteLambdaVersionZXNrBTCd5cn1PnWt2mFMg55Hc8v1pI02iksLxSgZlQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "WebsiteLambdaFunction"
               },
-              "CodeSha256": "q3J6q88hq8EqoDi4kPGmAhSlHDZL8xwdzEpPjH44ja0="
+              "CodeSha256": "lgefDBPD2bveji02lywz/WwOLEgrQcJKdR0kFWvQJRI="
             }
           },
           "ArtisanLambdaFunction": {
@@ -262,7 +262,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ecomm-lambda/dev/1572478201287-2019-10-30T23:30:01.287Z/ecomm-lambda.zip"
+                "S3Key": "serverless/ecomm-lambda/dev/1572505771779-2019-10-31T07:09:31.779Z/ecomm-lambda.zip"
               },
               "FunctionName": "ecomm-lambda-dev-artisan",
               "Handler": "artisan",
@@ -311,14 +311,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "ArtisanLambdaVersionqAmuN0N0eeen0gXmmKneZexjQ9jCu0HUCR46cJyzU": {
+          "ArtisanLambdaVersionnvuYTxWyqwYQLCT864rIIM4zKYOEmILhuT5r94IBy8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ArtisanLambdaFunction"
               },
-              "CodeSha256": "q3J6q88hq8EqoDi4kPGmAhSlHDZL8xwdzEpPjH44ja0="
+              "CodeSha256": "lgefDBPD2bveji02lywz/WwOLEgrQcJKdR0kFWvQJRI="
             }
           },
           "ApiGatewayRestApi": {
@@ -436,7 +436,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1572478161802": {
+          "ApiGatewayDeployment1572505740907": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -521,7 +521,7 @@
           "Assets": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
-              "BucketName": "assets.bagisto.com",
+              "BucketName": "assets.myshop.com",
               "CorsConfiguration": {
                 "CorsRules": [
                   {
@@ -551,7 +551,7 @@
                     "Effect": "Allow",
                     "Principal": "*",
                     "Action": "s3:GetObject",
-                    "Resource": "arn:aws:s3:::assets.bagisto.com/*"
+                    "Resource": "arn:aws:s3:::assets.myshop.com/*"
                   }
                 ]
               }
@@ -573,7 +573,13 @@
                     "OriginPath": "/dev",
                     "CustomOriginConfig": {
                       "OriginProtocolPolicy": "https-only"
-                    }
+                    },
+                    "OriginCustomHeaders": [
+                      {
+                        "HeaderName": "X-Forwarded-Host",
+                        "HeaderValue": "d1w19xs20dcivp.cloudfront.net"
+                      }
+                    ]
                   },
                   {
                     "Id": "Assets",
@@ -615,7 +621,7 @@
                 },
                 "CacheBehaviors": [
                   {
-                    "PathPattern": "/themes/*",
+                    "PathPattern": "/css/*",
                     "TargetOriginId": "Assets",
                     "AllowedMethods": [
                       "GET",
@@ -631,7 +637,71 @@
                     "Compress": true
                   },
                   {
-                    "PathPattern": "/installer/*",
+                    "PathPattern": "/js/*",
+                    "TargetOriginId": "Assets",
+                    "AllowedMethods": [
+                      "GET",
+                      "HEAD"
+                    ],
+                    "ForwardedValues": {
+                      "QueryString": "false",
+                      "Cookies": {
+                        "Forward": "none"
+                      }
+                    },
+                    "ViewerProtocolPolicy": "redirect-to-https",
+                    "Compress": true
+                  },
+                  {
+                    "PathPattern": "/favicons/*",
+                    "TargetOriginId": "Assets",
+                    "AllowedMethods": [
+                      "GET",
+                      "HEAD"
+                    ],
+                    "ForwardedValues": {
+                      "QueryString": "false",
+                      "Cookies": {
+                        "Forward": "none"
+                      }
+                    },
+                    "ViewerProtocolPolicy": "redirect-to-https",
+                    "Compress": true
+                  },
+                  {
+                    "PathPattern": "/fonts/*",
+                    "TargetOriginId": "Assets",
+                    "AllowedMethods": [
+                      "GET",
+                      "HEAD"
+                    ],
+                    "ForwardedValues": {
+                      "QueryString": "false",
+                      "Cookies": {
+                        "Forward": "none"
+                      }
+                    },
+                    "ViewerProtocolPolicy": "redirect-to-https",
+                    "Compress": true
+                  },
+                  {
+                    "PathPattern": "/images/*",
+                    "TargetOriginId": "Assets",
+                    "AllowedMethods": [
+                      "GET",
+                      "HEAD"
+                    ],
+                    "ForwardedValues": {
+                      "QueryString": "false",
+                      "Cookies": {
+                        "Forward": "none"
+                      }
+                    },
+                    "ViewerProtocolPolicy": "redirect-to-https",
+                    "Compress": true
+                  },
+                  {
+                    "PathPattern": "/img/*",
                     "TargetOriginId": "Assets",
                     "AllowedMethods": [
                       "GET",
@@ -686,13 +756,13 @@
           "WebsiteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "WebsiteLambdaVersionj0Ce6rxmraFvvpe2rSpuf3BSVwbK3hBpNrcbllj1s"
+              "Ref": "WebsiteLambdaVersionZXNrBTCd5cn1PnWt2mFMg55Hc8v1pI02iksLxSgZlQ"
             }
           },
           "ArtisanLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ArtisanLambdaVersionqAmuN0N0eeen0gXmmKneZexjQ9jCu0HUCR46cJyzU"
+              "Ref": "ArtisanLambdaVersionnvuYTxWyqwYQLCT864rIIM4zKYOEmILhuT5r94IBy8"
             }
           },
           "ServiceEndpoint": {
@@ -826,7 +896,7 @@
         "Assets": {
           "Type": "AWS::S3::Bucket",
           "Properties": {
-            "BucketName": "assets.bagisto.com",
+            "BucketName": "assets.myshop.com",
             "CorsConfiguration": {
               "CorsRules": [
                 {
@@ -856,7 +926,7 @@
                   "Effect": "Allow",
                   "Principal": "*",
                   "Action": "s3:GetObject",
-                  "Resource": "arn:aws:s3:::assets.bagisto.com/*"
+                  "Resource": "arn:aws:s3:::assets.myshop.com/*"
                 }
               ]
             }
@@ -876,7 +946,13 @@
                   "OriginPath": "/dev",
                   "CustomOriginConfig": {
                     "OriginProtocolPolicy": "https-only"
-                  }
+                  },
+                  "OriginCustomHeaders": [
+                    {
+                      "HeaderName": "X-Forwarded-Host",
+                      "HeaderValue": "d1w19xs20dcivp.cloudfront.net"
+                    }
+                  ]
                 },
                 {
                   "Id": "Assets",
@@ -916,7 +992,7 @@
               },
               "CacheBehaviors": [
                 {
-                  "PathPattern": "/themes/*",
+                  "PathPattern": "/css/*",
                   "TargetOriginId": "Assets",
                   "AllowedMethods": [
                     "GET",
@@ -932,7 +1008,71 @@
                   "Compress": true
                 },
                 {
-                  "PathPattern": "/installer/*",
+                  "PathPattern": "/js/*",
+                  "TargetOriginId": "Assets",
+                  "AllowedMethods": [
+                    "GET",
+                    "HEAD"
+                  ],
+                  "ForwardedValues": {
+                    "QueryString": "false",
+                    "Cookies": {
+                      "Forward": "none"
+                    }
+                  },
+                  "ViewerProtocolPolicy": "redirect-to-https",
+                  "Compress": true
+                },
+                {
+                  "PathPattern": "/favicons/*",
+                  "TargetOriginId": "Assets",
+                  "AllowedMethods": [
+                    "GET",
+                    "HEAD"
+                  ],
+                  "ForwardedValues": {
+                    "QueryString": "false",
+                    "Cookies": {
+                      "Forward": "none"
+                    }
+                  },
+                  "ViewerProtocolPolicy": "redirect-to-https",
+                  "Compress": true
+                },
+                {
+                  "PathPattern": "/fonts/*",
+                  "TargetOriginId": "Assets",
+                  "AllowedMethods": [
+                    "GET",
+                    "HEAD"
+                  ],
+                  "ForwardedValues": {
+                    "QueryString": "false",
+                    "Cookies": {
+                      "Forward": "none"
+                    }
+                  },
+                  "ViewerProtocolPolicy": "redirect-to-https",
+                  "Compress": true
+                },
+                {
+                  "PathPattern": "/images/*",
+                  "TargetOriginId": "Assets",
+                  "AllowedMethods": [
+                    "GET",
+                    "HEAD"
+                  ],
+                  "ForwardedValues": {
+                    "QueryString": "false",
+                    "Cookies": {
+                      "Forward": "none"
+                    }
+                  },
+                  "ViewerProtocolPolicy": "redirect-to-https",
+                  "Compress": true
+                },
+                {
+                  "PathPattern": "/img/*",
                   "TargetOriginId": "Assets",
                   "AllowedMethods": [
                     "GET",
@@ -985,7 +1125,7 @@
     "artifact": "/Users/vincent.cau/Library/Mobile Documents/com~apple~CloudDocs/solar swiss/ecommerce/myshop/.serverless/ecomm-lambda.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/ecomm-lambda/dev/1572478201287-2019-10-30T23:30:01.287Z",
+    "artifactDirectoryName": "serverless/ecomm-lambda/dev/1572505771779-2019-10-31T07:09:31.779Z",
     "artifact": "ecomm-lambda.zip"
   }
 }

@@ -40,7 +40,7 @@ pip install awscli
 
 # aws s3 sync <directory> s3://<bucket-name> --delete
 
-aws s3 sync public/ s3://assets.bagisto.com --delete
+aws s3 sync public/ s3://assets.myshop.com --delete
 aws s3 sync public/vendor s3://assets.bagisto.com
 
 

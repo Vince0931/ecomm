@@ -98,7 +98,7 @@ resources:
     Assets:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: assets.bagisto.com
+        BucketName: assets.myshop.com
         CorsConfiguration:
           CorsRules:
             - AllowedHeaders: ["*"]
@@ -114,7 +114,7 @@ resources:
             -   Effect: Allow
                 Principal: '*' # everyone
                 Action: 's3:GetObject' # to read
-                Resource: 'arn:aws:s3:::assets.bagisto.com/*' # things in the bucket
+                Resource: 'arn:aws:s3:::assets.myshop.com/*' # things in the bucket
     WebsiteCDN:
       Type: AWS::CloudFront::Distribution
       Properties:
@@ -132,9 +132,9 @@ resources:
               OriginPath: '/dev'
               CustomOriginConfig:
                 OriginProtocolPolicy: 'https-only' # API Gateway only supports HTTPS
-              #OriginCustomHeaders:
-              #  - HeaderName: 'X-Forwarded-Host'
-              #    HeaderValue: 'lambda.web-id.fr'
+              OriginCustomHeaders:
+                - HeaderName: 'X-Forwarded-Host'
+                  HeaderValue: 'd1w19xs20dcivp.cloudfront.net'
             # The assets (S3)
             - Id: Assets
               # Use s3-website URLs instead if you host a static website (https://stackoverflow.com/questions/15309113/amazon-cloudfront-doesnt-respect-my-s3-website-buckets-index-html-rules#15528757)
@@ -163,7 +163,7 @@ resources:
             ViewerProtocolPolicy: redirect-to-https
           CacheBehaviors:
             # Css will be served under the `/css/` prefix
-            - PathPattern: '/themes/*'
+            - PathPattern: '/css/*'
               TargetOriginId: Assets # the static files on S3
               AllowedMethods: [GET, HEAD]
               ForwardedValues:
@@ -173,7 +173,47 @@ resources:
               ViewerProtocolPolicy: redirect-to-https
               Compress: true
             # js will be served under the `/js/` prefix
-            - PathPattern: '/installer/*'
+            - PathPattern: '/js/*'
+              TargetOriginId: Assets # the static files on S3
+              AllowedMethods: [GET, HEAD]
+              ForwardedValues:
+                QueryString: 'false'
+                Cookies:
+                  Forward: none
+              ViewerProtocolPolicy: redirect-to-https
+              Compress: true
+            # favicons will be served under the `/favicons/` prefix
+            - PathPattern: '/favicons/*'
+              TargetOriginId: Assets # the static files on S3
+              AllowedMethods: [GET, HEAD]
+              ForwardedValues:
+                QueryString: 'false'
+                Cookies:
+                  Forward: none
+              ViewerProtocolPolicy: redirect-to-https
+              Compress: true
+            # fonts will be served under the `/fonts/` prefix
+            - PathPattern: '/fonts/*'
+              TargetOriginId: Assets # the static files on S3
+              AllowedMethods: [GET, HEAD]
+              ForwardedValues:
+                QueryString: 'false'
+                Cookies:
+                  Forward: none
+              ViewerProtocolPolicy: redirect-to-https
+              Compress: true
+            # images will be served under the `/images/` prefix
+            - PathPattern: '/images/*'
+              TargetOriginId: Assets # the static files on S3
+              AllowedMethods: [GET, HEAD]
+              ForwardedValues:
+                QueryString: 'false'
+                Cookies:
+                  Forward: none
+              ViewerProtocolPolicy: redirect-to-https
+              Compress: true
+            # img will be served under the `/img/` prefix
+            - PathPattern: '/img/*'
               TargetOriginId: Assets # the static files on S3
               AllowedMethods: [GET, HEAD]
               ForwardedValues:
