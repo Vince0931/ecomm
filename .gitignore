@@ -7,6 +7,8 @@
 .env
 .env.backup
 .phpunit.result.cache
+.idea
+.serverless/
 Homestead.json
 Homestead.yaml
 npm-debug.log
