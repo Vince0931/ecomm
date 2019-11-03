@@ -21,6 +21,15 @@ composer install --optimize-autoloader --no-dev
 npm install serverless-pseudo-parameters
 
 
+# add new php init
+mkdir php
+mkdir conf.d
+nano php.ini
+ > extension=pdo_mysql
+
+vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- migrate --force
+vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- db:seed --force
+
 
 
 # link nova media
@@ -41,7 +50,7 @@ pip install awscli
 # aws s3 sync <directory> s3://<bucket-name> --delete
 
 aws s3 sync public/ s3://assets.myshop.com --delete
-aws s3 sync public/vendor s3://assets.bagisto.com
+#aws s3 sync public/vendor s3://assets.bagisto.com
 
 
 # sécurisation des identidfiants
@@ -50,7 +59,7 @@ aws s3 sync public/vendor s3://assets.bagisto.com
 aws ssm put-parameter --region eu-west-3 --name '/webid-lambda/db-username' --type String --value 'admin'
 aws ssm put-parameter --region eu-west-3 --name '/webid-lambda/db-password' --type String --value 'jAghmKUOUvFrQ2ODhX2lpNwnCnwLtvZ7'
 
-${ssm:/webid-lambda/db-database}
+#${ssm:/webid-lambda/db-database}
 ${ssm:/webid-lambda/db-username}
 ${ssm:/webid-lambda/db-password}
 
