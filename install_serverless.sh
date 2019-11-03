@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
 
-# user=admin
-# password=jAghmKUOUvFrQ2ODhX2lpNwnCnwLtvZ7
-# host=staging.c8fzfidnwmue.eu-west-3.rds.amazonaws.com
-
 # check AWS id
 # change wedid and perso
 nano ~/.aws/credentials
@@ -16,7 +12,6 @@ composer u
 
 #optimise for deploy
 composer install --optimize-autoloader --no-dev
-
 
 npm install serverless-pseudo-parameters
 
@@ -39,8 +34,6 @@ vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- aimeos:cache
 # add in app/Providers/AppServiceProvider.php
     public function boot()
     {
-        Schema::defaultStringLength(191);
-
         // Make sure the directory for compiled views exist
         if (! is_dir(config('view.compiled'))) {
             mkdir(config('view.compiled'), 0755, true);
@@ -50,9 +43,12 @@ vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- aimeos:cache
 
 
 
-
-
 serverless deploy
+
+
+#########################
+#  AWS S3 ASSETS
+#########################
 
 
 # sync asset to aws bucket S3 Manually
@@ -68,6 +64,11 @@ aws s3 sync public/ s3://assets.myshop.com --delete
 #aws s3 sync public/vendor s3://assets.bagisto.com
 
 
+
+#########################
+#  AWS SECURE KEY
+#########################
+
 # sécurisation des identidfiants
 
 #aws ssm put-parameter --region eu-west-3 --name '/webid-lambda/db-database' --type String --value 'webid'
@@ -79,14 +80,11 @@ ${ssm:/webid-lambda/db-username}
 ${ssm:/webid-lambda/db-password}
 
 
+#########################
+#  DEBUG
+#########################
+
 serverless info
-
-
-
-#vendor/bin/bref cli webid-lambda-dev-artisan -- migrate
-vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-website
-vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- migrate
-
 
 # logs
 serverless logs -f website
