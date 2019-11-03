@@ -72,8 +72,6 @@ aws s3 sync public/ s3://assets.myshop.com --delete
 # sécurisation des identidfiants
 
 #aws ssm put-parameter --region eu-west-3 --name '/webid-lambda/db-database' --type String --value 'webid'
-aws ssm put-parameter --region eu-west-3 --name '/webid-lambda/db-username' --type String --value 'admin'
-aws ssm put-parameter --region eu-west-3 --name '/webid-lambda/db-password' --type String --value 'jAghmKUOUvFrQ2ODhX2lpNwnCnwLtvZ7'
 
 #${ssm:/webid-lambda/db-database}
 ${ssm:/webid-lambda/db-username}
