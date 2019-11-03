@@ -183,7 +183,7 @@ resources:
               ViewerProtocolPolicy: redirect-to-https
               Compress: true
             # favicons will be served under the `/favicons/` prefix
-            - PathPattern: '/favicons/*'
+            - PathPattern: '/files/*'
               TargetOriginId: Assets # the static files on S3
               AllowedMethods: [GET, HEAD]
               ForwardedValues:
@@ -193,7 +193,7 @@ resources:
               ViewerProtocolPolicy: redirect-to-https
               Compress: true
             # fonts will be served under the `/fonts/` prefix
-            - PathPattern: '/fonts/*'
+            - PathPattern: '/packages/*'
               TargetOriginId: Assets # the static files on S3
               AllowedMethods: [GET, HEAD]
               ForwardedValues:
@@ -203,7 +203,7 @@ resources:
               ViewerProtocolPolicy: redirect-to-https
               Compress: true
             # images will be served under the `/images/` prefix
-            - PathPattern: '/images/*'
+            - PathPattern: '/preview/*'
               TargetOriginId: Assets # the static files on S3
               AllowedMethods: [GET, HEAD]
               ForwardedValues:
@@ -213,7 +213,7 @@ resources:
               ViewerProtocolPolicy: redirect-to-https
               Compress: true
             # img will be served under the `/img/` prefix
-            - PathPattern: '/img/*'
+            - PathPattern: '/uploads/*'
               TargetOriginId: Assets # the static files on S3
               AllowedMethods: [GET, HEAD]
               ForwardedValues:
