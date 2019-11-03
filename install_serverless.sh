@@ -27,13 +27,17 @@ mkdir conf.d
 nano php.ini
  > extension=pdo_mysql
 
-vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- migrate --force
-vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- db:seed --force
+# vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- migrate --force
+# vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- db:seed --force
 
+vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- vendor:publish --all
+vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- migrate
+vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- aimeos:setup --option=setup/default/demo:1
+vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- aimeos:cache
 
 
 # link nova media
-php artisan storage:link
+#php artisan storage:link
 
 # create serverless.yml
 
