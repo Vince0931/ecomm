@@ -36,10 +36,21 @@ vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- aimeos:setup 
 vendor/bin/bref cli --region eu-west-3 ecomm-lambda-dev-artisan -- aimeos:cache
 
 
-# link nova media
-#php artisan storage:link
+# add in app/Providers/AppServiceProvider.php
+    public function boot()
+    {
+        Schema::defaultStringLength(191);
 
-# create serverless.yml
+        // Make sure the directory for compiled views exist
+        if (! is_dir(config('view.compiled'))) {
+            mkdir(config('view.compiled'), 0755, true);
+        }
+    }
+
+
+
+
+
 
 serverless deploy
 
